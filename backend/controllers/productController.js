@@ -5,11 +5,20 @@ const APIFeatures = require('../utils/apiFeatures')
 
 // => Get All Products /api/v1/poducts
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
+    const resPerPage = 4;
+    const productCount = await Product.countDocuments();
+
     const apiFeatures = new APIFeatures(Product.find(), req.query)
         .search()
-        .filter();
+        .filter()
+        .pagination(resPerPage)
     const products = await apiFeatures.query;
-    res.status(200).json({ success: true, products: products, count: products.length });
+    res.status(200).json({ 
+        success: true,
+        products: products,
+        productCount: productCount,
+        count: products.length 
+    });
 });
 
 // Add New Product => /admin/api/v1/poducts/new
