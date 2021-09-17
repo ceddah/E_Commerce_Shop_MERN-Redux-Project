@@ -23,6 +23,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Add New Product => /admin/api/v1/poducts/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+    req.body.user = req.user._id;
     const product = await Product.create(req.body);
 
     res.status(201).json({ 
