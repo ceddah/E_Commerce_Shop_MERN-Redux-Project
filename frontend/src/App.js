@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/Home';
+import ProductDetails from './components/product/ProductDetails'
 
 import * as ROUTES from './constants/routes';
 
@@ -15,6 +16,7 @@ function App() {
         <Header />
         <div className="container container-fluid">
           <Route path={ROUTES.HOME} component={Home} exact />
+          <Route path={ROUTES.PRODUCT_DETAILS} component={ProductDetails} exact />
         </div>
         <Footer />
       </div>
