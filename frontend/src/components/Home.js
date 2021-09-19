@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import MetaData from './layout/MetaData'
+import Pagination from 'react-js-pagination';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts } from '../actions/productActions';
@@ -9,11 +11,18 @@ import Loader from './layout/Loader';
 
 import { useAlert } from 'react-alert';
 
-const Home = () => {
+const Home = ({ match }) => {
+    const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
-    const { loading, products, error, productsCount } = useSelector(state => state.products);
+    const { loading, products, error, productsCount, resPerPage } = useSelector(state => state.products);
 
     const alert = useAlert(); 
+
+    const setCurrentPageNo = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
+
+    const keyword = match.params.keyword;
 
     useEffect(() => {
         if(error) {
@@ -21,9 +30,9 @@ const Home = () => {
             return alert.error(error);
         };
 
-        dispatch(getProducts());
+        dispatch(getProducts(keyword, currentPage));
 
-    }, [dispatch, error, alert])
+    }, [dispatch, error, alert, currentPage, keyword])
 
     return (
         <React.Fragment>
@@ -39,6 +48,23 @@ const Home = () => {
                         ))}
                     </div>
                 </section>
+
+                {resPerPage < productsCount && (
+                    <div className="d-flex justify-content-center mt-5">
+                        <Pagination
+                            activePage={currentPage}
+                            itemsCountPerPage={resPerPage}
+                            totalItemsCount={productsCount}
+                            onChange={setCurrentPageNo}
+                            nextPageText="Next"
+                            prevPageText="Previous"
+                            firstPageText="First"
+                            lastPageText="Last"
+                            itemClass="page-item"
+                            linkClass="page-link"
+                        />
+                    </div>
+                )}
                 </React.Fragment>
             )}
         </React.Fragment>
