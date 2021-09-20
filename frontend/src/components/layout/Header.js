@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../App.css';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+import { HOME } from '../../constants/routes'
 import Search from './Search';
 
 const Header = () => {
@@ -9,7 +10,9 @@ const Header = () => {
             <nav className="navbar row">
                 <div className="col-12 col-md-3">
                     <div className="navbar-brand">
-                    <img src="/images/logo.png" alt="logo" />
+                        <Link to={HOME} >
+                            <img src="/images/logo.png" alt="logo" />
+                        </Link>
                     </div>
                 </div>
 
