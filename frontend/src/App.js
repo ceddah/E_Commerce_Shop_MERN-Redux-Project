@@ -6,6 +6,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/Home';
 import ProductDetails from './components/product/ProductDetails'
+import Login from './components/user/Login';
 
 import * as ROUTES from './constants/routes';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path={ROUTES.HOME} component={Home} exact />
           <Route path={ROUTES.SEARCH_BY_KEYWORD} component={Home} exact />
           <Route path={ROUTES.PRODUCT_DETAILS} component={ProductDetails} exact />
+          <Route path={ROUTES.LOGIN} component={Login} exact />
         </div>
         <Footer />
       </div>
