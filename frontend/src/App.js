@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import { loadUser } from './actions/userActions';
+import store from './store';
 
+//Pages
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/Home';
 import ProductDetails from './components/product/ProductDetails'
 import Login from './components/user/Login';
 import Register from './components/user/Register';
-import { loadUser } from './actions/userActions';
-import store from './store';
+import Profile from './components/user/Profile'
 
 import * as ROUTES from './constants/routes';
+import ProtectedRoute from './components/route/ProtectedRoute'; 
 
 function App() {
 
@@ -29,6 +32,7 @@ function App() {
           <Route path={ROUTES.PRODUCT_DETAILS} component={ProductDetails} exact />
           <Route path={ROUTES.LOGIN} component={Login} exact />
           <Route path={ROUTES.REGISTER} component={Register} exact />
+          <ProtectedRoute path={ROUTES.MY_PROFILE} component={Profile} exact />
         </div>
         <Footer />
       </div>

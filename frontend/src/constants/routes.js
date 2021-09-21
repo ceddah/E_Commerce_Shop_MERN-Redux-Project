@@ -7,4 +7,6 @@ export const REGISTER = '/register';
 export const CART = '/cart';
 export const MY_ORDERS = '/orders/me';
 export const MY_PROFILE= '/me';
+export const UPDATE_PROFILE = '/me/update';
+export const UPDATE_PASSWORD = '/password/update';
 export const DASHBOARD = '/dashboard';
