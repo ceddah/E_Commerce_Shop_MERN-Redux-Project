@@ -4,3 +4,7 @@ export const SEARCH_BY_KEYWORD = '/search/:keyword';
 export const FORGOT_PASSWORD = '/password/forgot';
 export const LOGIN = '/login';
 export const REGISTER = '/register';
+export const CART = '/cart';
+export const MY_ORDERS = '/orders/me';
+export const MY_PROFILE= '/me';
+export const DASHBOARD = '/dashboard';

@@ -9,11 +9,17 @@ const cloudinary = require('cloudinary');
 //Registration => /api/v1/register
 exports.registerUser = catchAsyncErrors( async (req, res, next) => {
     const { name, email, password } = req.body;
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: 'avatars',
-        width: 150,
-        crop: 'scale'
-    });
+    let result = {};
+    if(req.body.avatar) {
+        result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: 'avatars',
+            width: 150,
+            crop: 'scale'
+        });
+    } else {
+        result.secure_url = 'https://res.cloudinary.com/dqs5qo3ts/image/upload/v1632225465/avatars/default_avatar_mc2qhu.jpg'
+        result.public_id = 'avatars/default_avatar_mc2qhu'
+    }
 
     const user = await User.create({
         name: name,
