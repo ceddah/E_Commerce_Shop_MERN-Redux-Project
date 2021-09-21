@@ -2,6 +2,7 @@ export const HOME = '/';
 export const PRODUCT_DETAILS = '/product/:id';
 export const SEARCH_BY_KEYWORD = '/search/:keyword';
 export const FORGOT_PASSWORD = '/password/forgot';
+export const RESET_PASSWORD = '/password/reset/:token';
 export const LOGIN = '/login';
 export const REGISTER = '/register';
 export const CART = '/cart';

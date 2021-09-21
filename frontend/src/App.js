@@ -14,6 +14,8 @@ import Register from './components/user/Register';
 import Profile from './components/user/Profile';
 import UpdateProfile from './components/user/UpdateProfile';
 import UpdatePassword from './components/user/UpdatePassword';
+import ForgotPassword from './components/user/ForgotPassword';
+import newPassword from './components/user/NewPassword';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
@@ -34,6 +36,8 @@ function App() {
           <Route path={ROUTES.PRODUCT_DETAILS} component={ProductDetails} exact />
           <Route path={ROUTES.LOGIN} component={Login} exact />
           <Route path={ROUTES.REGISTER} component={Register} exact />
+          <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} exact />
+          <Route path={ROUTES.RESET_PASSWORD} component={newPassword} exact />
           <ProtectedRoute path={ROUTES.MY_PROFILE} component={Profile} exact />
           <ProtectedRoute path={ROUTES.UPDATE_PROFILE} component={UpdateProfile} exact />
           <ProtectedRoute path={ROUTES.UPDATE_PASSWORD} component={UpdatePassword} exact />
