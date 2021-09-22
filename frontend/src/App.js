@@ -16,6 +16,7 @@ import UpdateProfile from './components/user/UpdateProfile';
 import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import newPassword from './components/user/NewPassword';
+import Cart from './components/cart/Cart';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
@@ -38,6 +39,7 @@ function App() {
           <Route path={ROUTES.REGISTER} component={Register} exact />
           <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} exact />
           <Route path={ROUTES.RESET_PASSWORD} component={newPassword} exact />
+          <Route path={ROUTES.CART} component={Cart} exact />
           <ProtectedRoute path={ROUTES.MY_PROFILE} component={Profile} exact />
           <ProtectedRoute path={ROUTES.UPDATE_PROFILE} component={UpdateProfile} exact />
           <ProtectedRoute path={ROUTES.UPDATE_PASSWORD} component={UpdatePassword} exact />
