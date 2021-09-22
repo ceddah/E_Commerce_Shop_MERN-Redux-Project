@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
-import { HOME, FORGOT_PASSWORD, REGISTER } from '../../constants/routes'
+import { FORGOT_PASSWORD, REGISTER } from '../../constants/routes'
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import Loader from '../layout/Loader';
 import MetaData from '../layout/MetaData';
 import { login, clearErrors } from '../../actions/userActions';
 
-const Login = ({ history }) => {
+const Login = ({ history, location }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const alert = useAlert();
     const dispatch = useDispatch();
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
-
+    const redirect = location.search ? location.search.split('=')[1] : '/';
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(login(email, password));
@@ -22,7 +22,8 @@ const Login = ({ history }) => {
 
     useEffect(() => {
         if(isAuthenticated) {
-            history.push(HOME)
+            // history.push(HOME)
+            history.push(redirect);
         }
     
         if(error) {
@@ -30,7 +31,7 @@ const Login = ({ history }) => {
             dispatch(clearErrors());
         }
 
-    }, [dispatch, alert, isAuthenticated, error, history]);
+    }, [dispatch, alert, isAuthenticated, error, history, redirect]);
 
     return (
         <React.Fragment>

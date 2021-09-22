@@ -7,7 +7,7 @@ import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItemToCart, removeCartItem } from '../../actions/cartActions'
 
-const Cart = () => {
+const Cart = ({ history }) => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const { cartItems } = useSelector(state => state.cart);
@@ -30,6 +30,10 @@ const Cart = () => {
         dispatch(removeCartItem(id));
 
         alert.success('Item was removed from cart')
+    }
+
+    const checkoutHandler = () => {
+        history.push('/login?redirect=shipping');
     }
 
     return (
@@ -87,7 +91,7 @@ const Cart = () => {
                             <p>Est. total: <span className="order-summary-values">${cartItems.reduce((acc, item) => acc + (item.quantity * item.price), 0).toFixed(2)}</span></p>
             
                             <hr />
-                            <button id="checkout_btn" className="btn btn-primary btn-block">Check out</button>
+                            <button onClick={checkoutHandler}id="checkout_btn" className="btn btn-primary btn-block">Check out</button>
                         </div>
                     </div>
                 </div>
