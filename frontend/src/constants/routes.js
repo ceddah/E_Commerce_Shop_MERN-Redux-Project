@@ -11,5 +11,6 @@ export const MY_PROFILE= '/me';
 export const UPDATE_PROFILE = '/me/update';
 export const UPDATE_PASSWORD = '/password/update';
 export const DASHBOARD = '/dashboard';
-export const CONFIRM_ORDER_PAGE = '/confirm';
+export const CONFIRM_ORDER_PAGE = '/order/confirm';
 export const SHIPPING_PAGE = '/shipping';
+export const PAYMENT = '/payment';
