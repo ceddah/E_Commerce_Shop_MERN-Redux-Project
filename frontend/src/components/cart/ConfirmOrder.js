@@ -5,7 +5,7 @@ import MetaData from '../layout/MetaData'
 import CheckoutSteps from './CheckoutSteps';
 
 import { useSelector } from 'react-redux'
-import { HOME } from '../../constants/routes';
+import { PAYMENT } from '../../constants/routes';
 
 const ConfirmOrder = ({ history }) => {
     const { cartItems, shippingInfo } = useSelector(state => state.cart);
@@ -24,7 +24,7 @@ const ConfirmOrder = ({ history }) => {
             totalPrice: totalPrice
         };
         sessionStorage.setItem('orderInfo', JSON.stringify(data));
-        history.push(HOME);
+        history.push(PAYMENT);
     }
 
     return (
