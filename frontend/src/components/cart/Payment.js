@@ -5,7 +5,8 @@ import CheckoutSteps from './CheckoutSteps';
 
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux'
-import { CONFIRM_ORDER_PAGE } from '../../constants/routes';
+import { ORDER_SUCCESS } from '../../constants/routes';
+import { createOrder, clearErrors } from '../../actions/orderActions'
 
 import { 
     useStripe,
@@ -32,12 +33,93 @@ const Payment = ({ history }) => {
     const stripe = useStripe();
     const elements = useElements();
     const dispatch = useDispatch();
+    const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
+    
     const { user } = useSelector(state => state.auth);
     const { cartItems, shippingInfo } = useSelector(state => state.cart);
+    const { error } = useSelector(state => state.newOrder)
     
-    useEffect(() => {
+    const paymentData = {
+        amount: Math.round(orderInfo.totalPrice * 100),
+    }
 
-    }, [])
+    const order = {
+        orderItems: cartItems,
+        shippingInfo: shippingInfo,
+        
+    }
+
+    if(orderInfo) {
+        order.itemsPrice = orderInfo.itemsPrice
+        order.shippingPrice = orderInfo.shippingPrice
+        order.taxPrice = orderInfo.taxPrice
+        order.totalPrice = orderInfo.totalPrice
+    };
+
+    const submitHandler = async (e) => {
+        e.preventDefault();
+
+        document.querySelector('#pay_btn').disabled = true;
+
+        let res;
+        try {
+
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            res = await axios.post('/api/v1/payment/process', paymentData, config)
+
+            const clientSecret = res.data.client_secret;
+
+            if (!stripe || !elements) {
+                return;
+            }
+
+            const result = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardNumberElement),
+                    billing_details: {
+                        name: user.name,
+                        email: user.email
+                    }
+                }
+            });
+
+            if (result.error) {
+                alert.error(result.error.message);
+                document.querySelector('#pay_btn').disabled = false;
+            } else {
+
+                // The payment is processed or not
+                if (result.paymentIntent.status === 'succeeded') {
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
+                    
+                    dispatch(createOrder(order));
+                    history.push(ORDER_SUCCESS)
+                } else {
+                    alert.error('There is some issue while payment processing')
+                }
+            }
+
+
+        } catch (error) {
+            document.querySelector('#pay_btn').disabled = false;
+            alert.error(error.response.data.message)
+        }
+    }
+
+    useEffect(() => {
+        if(error) {
+            alert.error(error);
+            dispatch(clearErrors())
+        }
+    }, [alert, dispatch, error]);
 
     return (
         <React.Fragment>
@@ -45,7 +127,7 @@ const Payment = ({ history }) => {
             <CheckoutSteps shipping confirmOrder payment />
             <div className="row wrapper">
             <div className="col-10 col-lg-5">
-                <form className="shadow-lg">
+                <form onSubmit={submitHandler}className="shadow-lg">
                     <h1 className="mb-4">Card Info</h1>
                     <div className="form-group">
                     <label htmlFor="card_num_field">Card Number</label>
@@ -83,7 +165,7 @@ const Payment = ({ history }) => {
                     type="submit"
                     className="btn btn-block py-3"
                     >
-                    Pay
+                    Pay {` - $${orderInfo && orderInfo.totalPrice}`}
                     </button>
         
                 </form>

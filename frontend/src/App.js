@@ -25,6 +25,7 @@ import Cart from './components/cart/Cart';
 import Shipping from './components/cart/Shipping';
 import ConfirmOrder from './components/cart/ConfirmOrder';
 import Payment from './components/cart/Payment';
+import OrderSuccess from './components/cart/OrderSuccess';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
@@ -60,6 +61,7 @@ function App() {
           <ProtectedRoute path={ROUTES.UPDATE_PASSWORD} component={UpdatePassword} exact />
           <ProtectedRoute path={ROUTES.SHIPPING_PAGE} component={Shipping} exact />
           <ProtectedRoute path={ROUTES.CONFIRM_ORDER_PAGE} component={ConfirmOrder} exact />
+          <ProtectedRoute path={ROUTES.ORDER_SUCCESS} component={OrderSuccess} exact />
           {stripeApiKey && 
             <Elements stripe={loadStripe(stripeApiKey)} >
               <ProtectedRoute path={ROUTES.PAYMENT} component={Payment} exact />
