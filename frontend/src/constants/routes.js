@@ -13,5 +13,6 @@ export const UPDATE_PASSWORD = '/password/update';
 export const DASHBOARD = '/dashboard';
 export const CONFIRM_ORDER_PAGE = '/order/confirm';
 export const ORDER_SUCCESS = '/order/success';
+export const VIEW_ORDER = '/order/:orderId';
 export const SHIPPING_PAGE = '/shipping';
 export const PAYMENT = '/payment';

@@ -60,11 +60,8 @@ const Header = () => {
                                 <span>{user && user.name}</span>
                             </Link>
                             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
-                                {user && user.role !== 'admin' ? (
-                                    <Link to={MY_ORDERS} className="dropdown-item">Orders</Link>
-                                ) : (
-                                    <Link to={DASHBOARD} className="dropdown-item">Dashboard</Link>
-                                ) }
+                                {user && user.role === 'admin' ? <Link to={DASHBOARD} className="dropdown-item">Dashboard</Link> : null}
+                                <Link to={MY_ORDERS} className="dropdown-item">Orders</Link>
                                 <Link to={MY_PROFILE} className="dropdown-item">Profile</Link>
                                 <Link to={HOME} className="dropdown-item text-danger" onClick={logoutHandler}>
                                     Logout

@@ -56,7 +56,7 @@ exports.myOrders = catchAsyncErrors( async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        order: orders
+        orders: orders
     });
 });
 
