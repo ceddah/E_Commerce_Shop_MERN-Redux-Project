@@ -122,7 +122,7 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
     await product.save({ validateBeforeSave: false });
 
     res.status(200).json({
-        sucess: true
+        success: true
     });
 });
 
