@@ -16,3 +16,9 @@ export const ORDER_SUCCESS = '/order/success';
 export const VIEW_ORDER = '/order/:orderId';
 export const SHIPPING_PAGE = '/shipping';
 export const PAYMENT = '/payment';
+
+export const VIEW_ALL_PRODUCTS = '/admin/products';
+export const CREATE_PRODUCT = '/admin/product';
+export const VIEW_ALL_ORDERS = '/admin/orders';
+export const VIEW_ALL_USERS = '/admin/users';
+export const VIEW_ALL_REVIEWS = '/admin/reviews';

@@ -2,8 +2,9 @@ const Product = require('../Models/product');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures')
+const cloudinary = require('cloudinary')
 
-// => Get All Products /api/v1/poducts
+// => Get All Products /api/v1/products
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     const resPerPage = 4;
     const productCount = await Product.countDocuments();
@@ -27,8 +28,30 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     })
 });
 
-// Add New Product => /admin/api/v1/poducts/new
+// Add New Product => /admin/api/v1/admin/products/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+    let images = []
+    //If user uploads one image, it will be a typeof String, if there are multiple it will be an array
+    if (typeof req.body.images === 'string') {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+    let imagesLinks = [];
+
+    for (let i = 0; i < images.length; i++) {
+        const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: 'products'
+        });
+
+        imagesLinks.push({
+            public_id: result.public_id,
+            url: result.secure_url
+        })
+    }
+
+    req.body.images = imagesLinks
+    //Appending currently logged in user ID to req.body before we save it.
     req.body.user = req.user._id;
     const product = await Product.create(req.body);
 
@@ -157,4 +180,14 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({
         success: true
     });
+});
+
+// => Get All Products /api/v1/admin/products
+exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
+    const products = await Product.find(); 
+
+    res.status(200).json({
+        success: true,
+        products
+    })
 });

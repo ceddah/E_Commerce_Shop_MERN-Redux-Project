@@ -4,6 +4,7 @@ import './App.css';
 import { loadUser } from './actions/userActions';
 import store from './store';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 //Stripe Payment
 import { Elements } from '@stripe/react-stripe-js';
@@ -28,12 +29,16 @@ import Payment from './components/cart/Payment';
 import OrderSuccess from './components/cart/OrderSuccess';
 import ListOrders from './components/order/ListOrders';
 import OrderDetails from './components/order/OrderDetails';
+import Dashboard from './components/admin/Dashboard';
+import ProductsList from './components/admin/ProductsList';
+import NewProduct from './components/admin/NewProduct';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
+  const { user, loading } = useSelector(state => state.auth);
   useEffect(() => {
     store.dispatch(loadUser());
 
@@ -70,9 +75,14 @@ function App() {
             <Elements stripe={loadStripe(stripeApiKey)} >
               <ProtectedRoute path={ROUTES.PAYMENT} component={Payment} exact />
             </Elements>
-            }
+          }
         </div>
-        <Footer />
+        <ProtectedRoute path={ROUTES.DASHBOARD} isAdmin={true} component={Dashboard} exact />
+        <ProtectedRoute path={ROUTES.VIEW_ALL_PRODUCTS} isAdmin={true} component={ProductsList} exact />
+        <ProtectedRoute path={ROUTES.CREATE_PRODUCT} isAdmin={true} component={NewProduct} exact />
+        {!loading && user.role !== 'admin' && (
+          <Footer />
+        )}
       </div>
     </Router>
   );
