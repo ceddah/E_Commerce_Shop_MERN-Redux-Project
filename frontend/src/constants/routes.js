@@ -22,3 +22,4 @@ export const CREATE_PRODUCT = '/admin/product';
 export const VIEW_ALL_ORDERS = '/admin/orders';
 export const VIEW_ALL_USERS = '/admin/users';
 export const VIEW_ALL_REVIEWS = '/admin/reviews';
+export const UPDATE_PRODUCT = '/admin/product/:id';

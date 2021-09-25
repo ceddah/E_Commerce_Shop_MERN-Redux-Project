@@ -9,7 +9,7 @@ import Sidebar from './Sidebar'
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAdminProducts, deleteProduct, clearErrors } from '../../actions/productActions'
-// import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
+import { DELETE_PRODUCT_RESET } from '../../constants/productConstants'
 
 const ProductsList = ({ history }) => {
 
@@ -87,11 +87,11 @@ const ProductsList = ({ history }) => {
             dispatch(clearErrors())
         }
 
-        // if (isDeleted) {
-        //     alert.success('Product deleted successfully');
-        //     history.push('/admin/products');
-        //     dispatch({ type: DELETE_PRODUCT_RESET })
-        // }
+        if (isDeleted) {
+            alert.success('Product deleted successfully');
+            history.push('/admin/products');
+            dispatch({ type: DELETE_PRODUCT_RESET })
+        }
 
     }, [dispatch, alert, error, deleteError, isDeleted, history])
 

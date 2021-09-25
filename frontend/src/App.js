@@ -32,6 +32,7 @@ import OrderDetails from './components/order/OrderDetails';
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import NewProduct from './components/admin/NewProduct';
+import UpdateProduct from './components/admin/UpdateProduct';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
@@ -80,7 +81,8 @@ function App() {
         <ProtectedRoute path={ROUTES.DASHBOARD} isAdmin={true} component={Dashboard} exact />
         <ProtectedRoute path={ROUTES.VIEW_ALL_PRODUCTS} isAdmin={true} component={ProductsList} exact />
         <ProtectedRoute path={ROUTES.CREATE_PRODUCT} isAdmin={true} component={NewProduct} exact />
-        {!loading && user.role !== 'admin' && (
+        <ProtectedRoute path={ROUTES.UPDATE_PRODUCT} isAdmin={true} component={UpdateProduct} exact />
+        {!loading && user && user.role !== 'admin' && (
           <Footer />
         )}
       </div>
