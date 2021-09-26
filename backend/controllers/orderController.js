@@ -50,7 +50,7 @@ exports.getSingleOrder = catchAsyncErrors( async (req, res, next) => {
 //Get Logged-in User Orders => /api/v1/orders/me
 exports.myOrders = catchAsyncErrors( async (req, res, next) => {
     const orders = await Order.find({ user: req.user._id });
-    console.log(req.user._id);
+
     if(!orders) {
         next(new ErrorHandler('Order not found with this id', 404))
     }

@@ -24,3 +24,4 @@ export const VIEW_ALL_USERS = '/admin/users';
 export const VIEW_ALL_REVIEWS = '/admin/reviews';
 export const UPDATE_ORDER_STATUS = '/admin/order/:id'
 export const UPDATE_PRODUCT = '/admin/product/:id';
+export const UPDATE_USER = '/admin/user/:id';
