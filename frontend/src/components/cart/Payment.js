@@ -6,6 +6,7 @@ import CheckoutSteps from './CheckoutSteps';
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux'
 import { ORDER_SUCCESS } from '../../constants/routes';
+import { CLEAR_CART_AFTER_PURCHASE } from '../../constants/cartConstants';
 import { createOrder, clearErrors } from '../../actions/orderActions'
 
 import { 
@@ -101,7 +102,8 @@ const Payment = ({ history }) => {
                     }
                     
                     dispatch(createOrder(order));
-                    history.push(ORDER_SUCCESS)
+                    dispatch({ type: CLEAR_CART_AFTER_PURCHASE });
+                    history.push(ORDER_SUCCESS);
                 } else {
                     alert.error('There is some issue while payment processing')
                 }

@@ -37,6 +37,7 @@ import OrderList from './components/admin/OrderList';
 import ProcessOrder from './components/admin/ProcessOrder';
 import UserList from './components/admin/UserList';
 import UpdateUser from './components/admin/UpdateUser';
+import ProductReviews from './components/admin/ProductReviews';
 
 import * as ROUTES from './constants/routes';
 import ProtectedRoute from './components/route/ProtectedRoute'; 
@@ -91,6 +92,7 @@ function App() {
         <ProtectedRoute path={ROUTES.UPDATE_ORDER_STATUS} isAdmin={true} component={ProcessOrder} exact />
         <ProtectedRoute path={ROUTES.VIEW_ALL_USERS} isAdmin={true} component={UserList} exact />
         <ProtectedRoute path={ROUTES.UPDATE_USER} isAdmin={true} component={UpdateUser} exact />
+        <ProtectedRoute path={ROUTES.VIEW_ALL_REVIEWS} isAdmin={true} component={ProductReviews} exact />
         {!loading && user && user.role !== 'admin' && (
           <Footer />
         )}
