@@ -100,7 +100,7 @@ const Shipping = ({ history }) => {
                             className="btn btn-block py-3"
                         >
                             CONTINUE
-                            </button>
+                        </button>
                     </form>
                 </div>
             </div>
