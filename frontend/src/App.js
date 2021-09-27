@@ -45,7 +45,7 @@ import ProtectedRoute from './components/route/ProtectedRoute';
 
 function App() {
   const [stripeApiKey, setStripeApiKey] = useState('');
-  const { user, loading } = useSelector(state => state.auth);
+  const { user, isAuthenticated, loading } = useSelector(state => state.auth);
   useEffect(() => {
     store.dispatch(loadUser());
 
@@ -93,7 +93,7 @@ function App() {
         <ProtectedRoute path={ROUTES.VIEW_ALL_USERS} isAdmin={true} component={UserList} exact />
         <ProtectedRoute path={ROUTES.UPDATE_USER} isAdmin={true} component={UpdateUser} exact />
         <ProtectedRoute path={ROUTES.VIEW_ALL_REVIEWS} isAdmin={true} component={ProductReviews} exact />
-        {!loading && user && user.role !== 'admin' && (
+        {!loading && (!isAuthenticated || user.role !== 'admin') && (
           <Footer />
         )}
       </div>
