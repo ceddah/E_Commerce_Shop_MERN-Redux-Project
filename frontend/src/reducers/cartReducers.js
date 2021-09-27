@@ -32,6 +32,7 @@ export const cartReducer = (state = { cartItems: [], shippingInfo: {} }, action)
                 shippingInfo: action.payload
             }
         case CLEAR_CART_AFTER_PURCHASE:
+            localStorage.removeItem('cartItems');
             return {
                 ...state,
                 cartItems: []

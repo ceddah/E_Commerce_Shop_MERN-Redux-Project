@@ -25,8 +25,11 @@ const Header = () => {
             <nav className="navbar row">
                 <div className="col-12 col-md-3">
                     <div className="navbar-brand">
-                        <Link to={HOME} >
-                            <img src="/images/logo.png" alt="logo" />
+                        <Link to={HOME} className="logo-link" >
+                            <div className="d-flex px-3 rounded py-1 bg-dark">
+                                <svg viewBox="0 0 24 24" width="36" height="36" stroke="#fa9c23" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                <h3 className="ml-3">E-Shop</h3>
+                            </div>
                         </Link>
                     </div>
                 </div>

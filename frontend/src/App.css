@@ -615,6 +615,14 @@ ul.CTAs a {
   color: grey;
 }
 
+.logo-link {
+  text-decoration: none !important;
+}
+
+.logo-link:hover {
+  color: #007bff !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
