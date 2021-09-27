@@ -7,4 +7,4 @@ Key Features:
 - Advanced Filtering
 - Payment with Stripe
 
-#### Preview: [Live Demo:](https://soon.com)
+#### Preview: [Live Demo:](https://ecommerce-mern-app4.herokuapp.com/)
