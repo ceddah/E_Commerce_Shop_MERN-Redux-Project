@@ -5,6 +5,7 @@ Key Features:
 - Data Validation
 - Pagination
 - Advanced Filtering
+- Advanced Location Intellisense
 - Payment with Stripe
 
 #### Preview: [Live Demo:](https://ecommerce-mern-app4.herokuapp.com/)
